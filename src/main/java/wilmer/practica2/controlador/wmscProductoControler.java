@@ -6,16 +6,19 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import wilmer.practica2.modelos.WmscProducto;
 
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @RestController
 public class wmscProductoControler {
-    private List<WmscProducto> products = List.of(
-            new WmscProducto("Television", "Samsung",1145.67,"S001"),
-            new WmscProducto("Washing Machine", "LG",114.67,"L001"),
-            new WmscProducto("Laptop", "Apple",11453.67,"A001")
-    );
+    //formato con fecha sin hora
+    Date date = new GregorianCalendar(2021, Calendar.JANUARY, 1).getTime();
+
+
+    private List<WmscProducto> products = new ArrayList<>(List.of(
+            new WmscProducto("Television", "Samsung",1145.67,"S001", 16, "M", date),
+            new WmscProducto("Washing Machine", "LG",114.67,"L001", 16, "M", null),
+            new WmscProducto("Laptop", "Apple",11453.67,"A001", 16, "M", null)
+    ));
 
     @GetMapping(value="/products/{id}", produces= MediaType.APPLICATION_XML_VALUE)
     public @ResponseBody WmscProducto fetchProducts(@PathParam("id") String productId){
@@ -25,8 +28,7 @@ public class wmscProductoControler {
     public List<WmscProducto> fetchProducts(){return products;}
 
     @PostMapping("/products")
-    public ResponseEntity<?> createProduct(
-            @RequestBody WmscProducto product){
+    public ResponseEntity<String> createProduct(@RequestBody WmscProducto product){
         // Create product with ID;
         String productID = UUID.randomUUID().toString();
         product.setId(productID);
