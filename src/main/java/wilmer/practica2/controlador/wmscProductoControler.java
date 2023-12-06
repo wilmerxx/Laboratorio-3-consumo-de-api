@@ -12,12 +12,10 @@ import java.util.*;
 public class wmscProductoControler {
     //formato con fecha sin hora
     Date date = new GregorianCalendar(2021, Calendar.JANUARY, 1).getTime();
-
-
     private List<WmscProducto> products = new ArrayList<>(List.of(
-            new WmscProducto("Television", "Samsung",1145.67,"S001", 16, "M", date),
-            new WmscProducto("Washing Machine", "LG",114.67,"L001", 16, "M", null),
-            new WmscProducto("Laptop", "Apple",11453.67,"A001", 16, "M", null)
+            new WmscProducto("Television", "Samsung",1145.67,"S001", 16, "Tecnologia", date),
+            new WmscProducto("Washing Machine", "LG",114.67,"L001", 16, "Electrodomestico", date),
+            new WmscProducto("Laptop", "Apple",11453.67,"A001", 16, "Tecnologia", date)
     ));
 
     @GetMapping(value="/products/{id}", produces= MediaType.APPLICATION_XML_VALUE)
@@ -48,5 +46,16 @@ public class wmscProductoControler {
         products.remove(1);
         // Update product. Return success or failure without response body
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/products/total")
+    public ResponseEntity<String> wmscObtenerValorTotal(){
+        List<String> wmscTotalProdcutos = new ArrayList<>();
+        double wmscTotal = 0;
+        for ( WmscProducto product: products) {
+            wmscTotal = product.getPrice() * product.getWmscCantidad();
+            wmscTotalProdcutos.add("El valor total del producto "+product.getName()+" es: "+wmscTotal);
+        }
+        return ResponseEntity.ok().body(wmscTotalProdcutos.toString());
     }
 }

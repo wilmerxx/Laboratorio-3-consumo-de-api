@@ -14,7 +14,6 @@ import java.util.*;
 public class WmscProductoControladorPostman {
     @Autowired
     private WmscProductoServicio wmscProductoServicio;
-
     @GetMapping(value="/wmscProducts/{id}", produces= MediaType.APPLICATION_XML_VALUE)
     public @ResponseBody WmscProducto fetchProducts(@PathParam("id") String productId){
         return wmscProductoServicio.wmscObtenerProducto(productId);
@@ -28,9 +27,7 @@ public class WmscProductoControladorPostman {
         }else{
             return ResponseEntity.ok().body(wmscProductoServicio.wmscProductoList());
         }
-
     }
-
     @PostMapping("/wmscProducts")
     public ResponseEntity<?> createProduct(@RequestBody WmscProducto product){
         wmscProductoServicio.createProduct(product);
@@ -43,7 +40,6 @@ public class WmscProductoControladorPostman {
                 product.setId(id);
                 wmscProductoServicio.updateProduct(product);
                 return ResponseEntity.ok().body(product);
-
             }
         }
         return ResponseEntity.ok().body("No se encontro el producto");
@@ -57,9 +53,7 @@ public class WmscProductoControladorPostman {
             }
         }
         return ResponseEntity.ok("No se encontro el producto");
-
     }
-
     @GetMapping("/wmscProducts/total")
     public ResponseEntity<?> wmscTotalProducts(){
         return ResponseEntity.ok().body(wmscProductoServicio.wmscObtenerValorTotal());

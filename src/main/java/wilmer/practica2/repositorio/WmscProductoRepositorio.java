@@ -5,15 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
-
 @Repository
 public class WmscProductoRepositorio {
     private List<WmscProducto> products = new ArrayList<>();
     public WmscProducto wmscObtenerProducto( String productId){
         for ( WmscProducto product: products) {
-            if(product.getId().equals(productId)){
-                return product;
-            }
+            if(product.getId().equals(productId)){return product;}
         }
         return null;
     }
@@ -33,12 +30,10 @@ public class WmscProductoRepositorio {
             product1.setSku(product.getSku());
             product1.setWmscCantidad(product.getWmscCantidad());
             product1.setWmscTipo(product.getWmscTipo());
-            product1.setWmscFechaElavoracion(product.getWmscFechaElavoracion());
+            product1.setWmscFechaFabricacion(product.getWmscFechaFabricacion());
         }
     }
     public void deleteProduct( WmscProducto product){
-        if(!Objects.isNull(product)){
-            products.remove(product);
-        }
+        if(!Objects.isNull(product)){ products.remove(product); }
     }
 }

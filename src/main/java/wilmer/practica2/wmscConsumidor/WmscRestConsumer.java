@@ -14,6 +14,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 public class WmscRestConsumer {
@@ -33,6 +34,15 @@ public class WmscRestConsumer {
         var products = response.getBody();
         System.out.println(products + "\n");
     }
+
+    public void wmscObtenerValorTotal() {
+        RestTemplate restTemplate = new RestTemplate();
+        String resourceUrl = "http://localhost:8080/products/total";
+        // Fetch response as List wrapped in ResponseEntity
+        var response = restTemplate.getForEntity(resourceUrl, String.class);
+        var products = response.getBody();
+        System.out.println(products + "\n");
+    }
     public void getProductObjects() {
 
         RestTemplate restTemplate = new RestTemplate();
@@ -48,8 +58,9 @@ public class WmscRestConsumer {
             String resourceUrl = "http://localhost:8080/products";
             // Create the request body by wrapping
             // the object in HttpEntity
-            Date wmscFechaNac = new Date(1993, 1, 20);
-            WmscProducto product = new WmscProducto("Television", "Samsung", 1145.67, "S001", 16, "M", wmscFechaNac);
+            Date wmscFechaNac = new GregorianCalendar( 1993, 1, 20).getTime();
+
+            WmscProducto product = new WmscProducto("Television", "Samsung", 1145.67, "S001", 16, "Tecnologia", wmscFechaNac);
             HttpEntity<WmscProducto> request = new HttpEntity<>(product);
             String productCreateResponse = restTemplate.postForObject(resourceUrl, request, String.class);
             System.out.println(productCreateResponse);
@@ -86,14 +97,14 @@ public class WmscRestConsumer {
         // Create the request body by wrapping
         // the object in HttpEntity
         Date wmscFechaNac = new Date(1993, 1, 20);
-        HttpEntity<WmscProducto> request = new HttpEntity<>(new WmscProducto("Television", "Samsung",1145.67,"S001", 14, "M", wmscFechaNac));
+        HttpEntity<WmscProducto> request = new HttpEntity<>(new WmscProducto("Television", "Samsung",1145.67,"S001", 5, "Tecnologia", wmscFechaNac));
         // Send the PUT method as a method parameter
         restTemplate.exchange( resourceUrl, HttpMethod.PUT, request, Void.class);
         System.out.println("Producto actualizado con exito");
     }
     public void getProductasStream() {
         Date wmscFechaNac = new Date(1993, 1, 20);
-        final WmscProducto fetchProductRequest = new WmscProducto("Television", "Samsung",1145.67,"S001", 14, "M", wmscFechaNac);
+        final WmscProducto fetchProductRequest = new WmscProducto("Television", "Samsung",1145.67,"S001", 14, "Tecnologia", wmscFechaNac);
         RestTemplate restTemplate = new RestTemplate();
         String resourceUrl = "http://localhost:8080/products";
         // Set HTTP headers in the request callback
@@ -122,6 +133,8 @@ public class WmscRestConsumer {
             WmscRestConsumer wmscConsumer = new WmscRestConsumer();
             System.out.println("---------------------Lista de productos formato json-----------------------------------------");
             wmscConsumer.getProductAsJson();
+            System.out.println("---------------------Lista de productos con el valor total de los productos-----------------");
+            wmscConsumer.wmscObtenerValorTotal();
             System.out.println("---------------------Crear producto----------------------------------------------------------");
             wmscConsumer.createProduct();
             System.out.println("---------------------Lista de productos formato lista con nuevo producto---------------------");

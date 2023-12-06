@@ -18,8 +18,8 @@ public class WmscProducto {
         private String wmscTipo;
         //atributo de tipo fecha sin hora con formato yyyy-MM-dd
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-        private Date wmscFechaElavoracion;
-        public WmscProducto(String name, String brand, Double price, String sku, int wmscCantidad, String wmscTipo, Date wmscFechaElavoracion) {
+        private Date wmscFechaFabricacion;
+        public WmscProducto(String name, String brand, Double price, String sku, int wmscCantidad, String wmscTipo, Date wmscFechaFabricacion) {
             super();
             this.id="";
             this.name = name;
@@ -28,6 +28,6 @@ public class WmscProducto {
             this.sku = sku;
             this.wmscCantidad = wmscCantidad;
             this.wmscTipo = wmscTipo;
-            this.wmscFechaElavoracion = wmscFechaElavoracion;
+            this.wmscFechaFabricacion = wmscFechaFabricacion;
         }
 }
