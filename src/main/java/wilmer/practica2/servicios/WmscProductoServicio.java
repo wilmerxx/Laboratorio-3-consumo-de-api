@@ -36,8 +36,6 @@ public class WmscProductoServicio {
            wmscTotal = product.getPrice() * product.getWmscCantidad();
               wmscTotalProdcutos.add("El valor total del producto "+product.getName()+" es: "+wmscTotal);
         }
-
         return wmscTotalProdcutos;
-
     }
 }

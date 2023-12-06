@@ -19,7 +19,6 @@ public class WmscProducto {
         //atributo de tipo fecha sin hora con formato yyyy-MM-dd
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
         private Date wmscFechaElavoracion;
-
         public WmscProducto(String name, String brand, Double price, String sku, int wmscCantidad, String wmscTipo, Date wmscFechaElavoracion) {
             super();
             this.id="";
