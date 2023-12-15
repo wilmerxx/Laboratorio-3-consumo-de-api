@@ -146,6 +146,7 @@ public class WmscRestConsumer {
     public static void main(String[] args){
         try{
             WmscRestConsumer wmscConsumer = new WmscRestConsumer();
+            System.out.println("---------------------Laboratorio 3-----------------------------------------");
             System.out.println("---------------------Lista de productos formato json-----------------------------------------");
             wmscConsumer.getProductAsJson();
             System.out.println("---------------------Eliminar producto-----------------------------------------");
