@@ -102,6 +102,21 @@ public class WmscRestConsumer {
         restTemplate.exchange( resourceUrl, HttpMethod.PUT, request, Void.class);
         System.out.println("Producto actualizado con exito");
     }
+
+    //eliminar un producto
+    public void eliminarProducto() {
+        RestTemplate restTemplate = new RestTemplate();
+        String resourceUrl = "http://localhost:8080/products";
+        // Create the request body by wrapping
+        // the object in HttpEntity
+        Date wmscFechaNac = new Date(1993, 1, 20);
+        HttpEntity<WmscProducto> request = new HttpEntity<>(new WmscProducto("Television", "Samsung",1145.67,"S001", 5, "Tecnologia", wmscFechaNac));
+        // Send the PUT method as a method parameter
+        //restTemplate.exchange( resourceUrl, HttpMethod.DELETE, request, String.class);
+        System.out.println(restTemplate.exchange( resourceUrl, HttpMethod.DELETE, request, String.class));
+    }
+
+
     public void getProductasStream() {
         Date wmscFechaNac = new Date(1993, 1, 20);
         final WmscProducto fetchProductRequest = new WmscProducto("Television", "Samsung",1145.67,"S001", 14, "Tecnologia", wmscFechaNac);
@@ -131,6 +146,10 @@ public class WmscRestConsumer {
     public static void main(String[] args){
         try{
             WmscRestConsumer wmscConsumer = new WmscRestConsumer();
+            System.out.println("---------------------Lista de productos formato json-----------------------------------------");
+            wmscConsumer.getProductAsJson();
+            System.out.println("---------------------Eliminar producto-----------------------------------------");
+            wmscConsumer.eliminarProducto();
             System.out.println("---------------------Lista de productos formato json-----------------------------------------");
             wmscConsumer.getProductAsJson();
             System.out.println("---------------------Lista de productos con el valor total de los productos-----------------");

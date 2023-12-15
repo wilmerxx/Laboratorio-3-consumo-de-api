@@ -43,7 +43,15 @@ public class wmscProductoControler {
     }
     @DeleteMapping("/products")
     public ResponseEntity<String> deleteProduct(@RequestBody WmscProducto product){
-        products.remove(1);
+        //products.remove(1);
+        for ( WmscProducto product1: products) {
+            if(product1.getId().equals(product.getId())){
+                products.remove(product1);
+                return ResponseEntity.ok().body("Producto eliminado");
+            }else{
+                return ResponseEntity.ok().body("No se encontro el producto");
+            }
+        }
         // Update product. Return success or failure without response body
         return ResponseEntity.ok().build();
     }
