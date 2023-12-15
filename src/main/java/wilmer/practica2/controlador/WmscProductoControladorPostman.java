@@ -28,6 +28,8 @@ public class WmscProductoControladorPostman {
             return ResponseEntity.ok().body(wmscProductoServicio.wmscProductoList());
         }
     }
+
+    //cambios para prueba de git 
     @PostMapping("/wmscProducts")
     public ResponseEntity<?> createProduct(@RequestBody WmscProducto product){
         wmscProductoServicio.createProduct(product);
